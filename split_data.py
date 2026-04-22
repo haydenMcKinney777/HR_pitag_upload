@@ -1,6 +1,7 @@
 import os
 import pandas as pd
 from openpyxl import Workbook
+from openpyxl.styles import Font
 from collections import defaultdict
 
 SKIP_TAG_PREFIXES = {
@@ -57,9 +58,9 @@ def write_output(map):
     for plant, taglist in sorted(map.items()):
         ws = wb.create_sheet(title = f"{plant}_Create")
         ws.append(['Create Tag'])   #create header column
-        # new_sheet = wb[ws]  #index the workbook by the plant_Create sheet name to grab the sheet we're working with and store that sheet in 'new_sheet'
+        ws["A1"].font = Font(bold=True)    #make header column bold
 
-        row = 1
+        row = 2
         for tag in taglist:
             ws.cell(row=row, column=1, value=tag)
             row += 1
